@@ -1,6 +1,6 @@
 "use client";
 
-import dynamic from "next/dynamic";
+import Image from "next/image";
 import { motion, type Variants } from "framer-motion";
 import { Plus } from "lucide-react";
 import type { Product } from "@/types/product";
@@ -8,14 +8,7 @@ import { Button } from "@/components/ui/button";
 import { MagneticButton } from "@/components/magnetic-button";
 import { useCart } from "@/components/providers/cart-provider";
 import { formatPrice } from "@/lib/format";
-
-// El anillo 3D solo se renderiza en cliente (WebGL)
-const HeroRing3D = dynamic(() => import("@/components/hero-ring-3d"), {
-  ssr: false,
-  loading: () => (
-    <div className="h-full w-full animate-pulse rounded-full bg-gradient-to-br from-accent/20 to-transparent" />
-  ),
-});
+import { isExternalImage } from "@/lib/product-images";
 
 interface HeroProps {
   bestseller: {
@@ -109,7 +102,7 @@ export function Hero({ bestseller }: HeroProps) {
           </motion.div>
         </motion.div>
 
-        {/* Producto más vendido, en 3D giratorio */}
+        {/* Producto más vendido */}
         <motion.div
           initial={{ opacity: 0, scale: 0.85 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -122,8 +115,18 @@ export function Hero({ bestseller }: HeroProps) {
             Más vendido
           </span>
 
-          <div className="aspect-square w-full">
-            <HeroRing3D />
+          <div className="relative aspect-square w-full overflow-hidden rounded-3xl">
+            <Image
+              src={image}
+              alt={product.name}
+              fill
+              sizes="(max-width: 768px) 90vw, 420px"
+              priority
+              className="object-cover"
+              placeholder="blur"
+              blurDataURL="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxIiBoZWlnaHQ9IjEiPjxyZWN0IHdpZHRoPSIxIiBoZWlnaHQ9IjEiIGZpbGw9IiMxNDE0MTYiLz48L3N2Zz4="
+              unoptimized={isExternalImage(image)}
+            />
           </div>
 
           <div className="mt-5 flex items-center justify-between gap-4">
@@ -140,10 +143,6 @@ export function Hero({ bestseller }: HeroProps) {
               <Plus size={18} />
             </button>
           </div>
-
-          <p className="pointer-events-none mt-2 text-center text-xs text-muted-foreground">
-            Arrastra para girar
-          </p>
         </motion.div>
       </div>
     </section>

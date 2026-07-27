@@ -1,4 +1,4 @@
-import { CheckCircle2, Clock, Landmark, MapPin, Phone, Smartphone, Truck } from "lucide-react";
+import { CheckCircle2, Clock, MapPin, Phone, Smartphone } from "lucide-react";
 import { Reveal } from "@/components/reveal";
 import { ContactForm } from "@/components/contact-form";
 import {
@@ -35,19 +35,6 @@ const CARD_PAYMENT_METHODS = [
     title: "PayPal",
     detail: "Sin compartir los datos de tu tarjeta",
     badges: [PayPalIcon],
-  },
-];
-
-const OTHER_PAYMENT_METHODS = [
-  {
-    icon: Landmark,
-    title: "Transferencia bancaria",
-    reason: "Ideal para piezas de mayor valor, con comprobante directo.",
-  },
-  {
-    icon: Truck,
-    title: "Contra entrega",
-    reason: "Paga al recibir tu joya, con la confianza de verla antes.",
   },
 ];
 
@@ -128,21 +115,6 @@ export function Contact() {
                         {method.detail}
                       </p>
                     </div>
-                  </div>
-                ))}
-              </div>
-
-              <div className="mt-3 grid grid-cols-1 gap-3 sm:grid-cols-2">
-                {OTHER_PAYMENT_METHODS.map((method) => (
-                  <div
-                    key={method.title}
-                    className="rounded-xl border border-surface-border p-4"
-                  >
-                    <method.icon className="mb-2 text-accent" size={20} />
-                    <p className="text-sm font-medium">{method.title}</p>
-                    <p className="mt-1 text-xs text-muted-foreground">
-                      {method.reason}
-                    </p>
                   </div>
                 ))}
               </div>

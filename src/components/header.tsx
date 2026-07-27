@@ -6,6 +6,7 @@ import { Menu, ShoppingBag, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useCart } from "@/components/providers/cart-provider";
 import { ThemeToggle } from "@/components/theme-toggle";
+import { Button } from "@/components/ui/button";
 
 const NAV_LINKS = [
   { href: "#coleccion", label: "Colección" },
@@ -55,6 +56,10 @@ export function Header() {
         </nav>
 
         <div className="flex items-center gap-3">
+          <Button asChild size="sm" className="hidden sm:inline-flex">
+            <a href="#coleccion">Menú</a>
+          </Button>
+
           <ThemeToggle />
 
           <button
