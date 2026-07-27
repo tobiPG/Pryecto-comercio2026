@@ -1,0 +1,209 @@
+@import "tailwindcss";
+
+/* ==========================================================================
+   Lueur Jewelry — Design tokens
+   Oscuro por defecto; la clase .light en <html> activa el tema claro.
+   ========================================================================== */
+
+:root {
+  --background: #0b0b0c;
+  --surface: #141416;
+  --surface-2: #1a1a1d;
+  --surface-border: #242428;
+  --foreground: #f5f3ef;
+  --muted-foreground: #a3a0a0;
+  --accent: #d8b676;
+  --accent-light: #e8cfa0;
+  --accent-foreground: #0b0b0c;
+  --ring: #d8b676;
+
+  /* Par tipográfico "Luxury Serif" (Cormorant + Montserrat) */
+  --font-heading: var(--font-cormorant);
+  --font-body: var(--font-montserrat);
+}
+
+:root.light {
+  --background: #faf9f6;
+  --surface: #ffffff;
+  --surface-2: #f4f2ec;
+  --surface-border: #e5e1d8;
+  --foreground: #17161a;
+  --muted-foreground: #6b6560;
+  --accent: #b8925a;
+  --accent-light: #8a6a3c;
+  --accent-foreground: #ffffff;
+  --ring: #b8925a;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-surface-border: var(--surface-border);
+  --color-foreground: var(--foreground);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-light: var(--accent-light);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-ring: var(--ring);
+
+  --font-heading: var(--font-heading);
+  --font-body: var(--font-body);
+}
+
+* {
+  border-color: var(--surface-border);
+}
+
+html {
+  scroll-behavior: auto; /* Lenis toma el control del scroll */
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-body), system-ui, sans-serif;
+  transition:
+    background-color 0.4s ease,
+    color 0.4s ease;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-heading), system-ui, sans-serif;
+}
+
+/* Fondo tipo "liquid glass": blobs de luz que fluyen despacio, como el
+   estilo de referencia (morphing, translúcido, animado). */
+.mesh-gradient {
+  position: relative;
+  background-image:
+    radial-gradient(circle at 15% 20%, color-mix(in srgb, var(--accent) 18%, transparent) 0%, transparent 45%),
+    radial-gradient(circle at 85% 15%, color-mix(in srgb, var(--accent) 12%, transparent) 0%, transparent 40%),
+    radial-gradient(circle at 50% 100%, color-mix(in srgb, var(--accent) 8%, transparent) 0%, transparent 50%);
+}
+
+.mesh-gradient::before,
+.mesh-gradient::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.5;
+  will-change: transform;
+}
+
+.mesh-gradient::before {
+  background: radial-gradient(circle, color-mix(in srgb, var(--accent) 35%, transparent) 0%, transparent 70%);
+  width: 55%;
+  height: 55%;
+  top: -10%;
+  left: -5%;
+  animation: liquid-drift-1 22s ease-in-out infinite alternate;
+}
+
+.mesh-gradient::after {
+  background: radial-gradient(circle, color-mix(in srgb, var(--accent-light) 30%, transparent) 0%, transparent 70%);
+  width: 45%;
+  height: 45%;
+  bottom: -5%;
+  right: -5%;
+  animation: liquid-drift-2 26s ease-in-out infinite alternate;
+}
+
+@keyframes liquid-drift-1 {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+  100% {
+    transform: translate(8%, 10%) scale(1.15);
+  }
+}
+
+@keyframes liquid-drift-2 {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+  100% {
+    transform: translate(-10%, -8%) scale(1.1);
+  }
+}
+
+/* Tarjetas con efecto de vidrio (glassmorphism / liquid glass) */
+.glass {
+  background: color-mix(in srgb, var(--surface) 65%, transparent);
+  backdrop-filter: blur(18px) saturate(160%);
+  -webkit-backdrop-filter: blur(18px) saturate(160%);
+  border: 1px solid color-mix(in srgb, var(--accent) 15%, var(--surface-border));
+}
+
+/* Barrido de luz iridiscente al pasar el cursor (evoca "captura la luz") */
+.shimmer {
+  position: relative;
+  overflow: hidden;
+}
+
+.shimmer::after {
+  content: "";
+  position: absolute;
+  top: -20%;
+  left: -60%;
+  width: 40%;
+  height: 140%;
+  background: linear-gradient(
+    100deg,
+    transparent 0%,
+    color-mix(in srgb, white 65%, var(--accent-light)) 50%,
+    transparent 100%
+  );
+  transform: skewX(-20deg);
+  opacity: 0.7;
+  pointer-events: none;
+  transition: left 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.shimmer:hover::after {
+  left: 130%;
+}
+
+/* Foco visible accesible, consistente en todo el sitio */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* Scrollbar discreto acorde a la paleta */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--background);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--surface-border);
+  border-radius: 999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent);
+}
+
+/* Respeta la preferencia del sistema: reduce/anula animaciones */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
