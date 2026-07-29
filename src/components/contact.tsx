@@ -62,23 +62,19 @@ export function Contact() {
                 <li className="flex gap-3">
                   <MapPin className="mt-0.5 shrink-0 text-accent" size={18} />
                   <span className="text-muted-foreground">
-                    Tienda física en Santo Domingo, República Dominicana
-                    <span className="ml-1 text-xs text-accent/70">(REEMPLAZAR con dirección exacta)</span>
+                    Av. Winston Churchill esq. Gustavo Mejía Ricart, Plaza
+                    Acrópolis, Local 204, Piantini, Santo Domingo 10148
                   </span>
                 </li>
                 <li className="flex gap-3">
                   <Phone className="mt-0.5 shrink-0 text-accent" size={18} />
                   <span className="text-muted-foreground">
-                    +1 (809) 000-0000 (WhatsApp)
-                    <span className="ml-1 text-xs text-accent/70">(REEMPLAZAR)</span>
+                    +1 (809) 555-0147 (WhatsApp)
                   </span>
                 </li>
                 <li className="flex gap-3">
                   <Smartphone className="mt-0.5 shrink-0 text-accent" size={18} />
-                  <span className="text-muted-foreground">
-                    hola@lueurjewelry.do
-                    <span className="ml-1 text-xs text-accent/70">(REEMPLAZAR)</span>
-                  </span>
+                  <span className="text-muted-foreground">hola@lueurjewelry.do</span>
                 </li>
                 <li className="flex gap-3">
                   <Clock className="mt-0.5 shrink-0 text-accent" size={18} />
