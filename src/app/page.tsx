@@ -1,25 +1,21 @@
-import { Hero } from "@/components/hero";
+import { PixelHero } from "@/components/ui/pixel-perfect-hero";
+import { GlowBackground } from "@/components/ui/spotlight-card";
 import { Collection } from "@/components/collection";
 import { About } from "@/components/about";
 import { Values } from "@/components/values";
 import { Contact } from "@/components/contact";
-import { getBestsellerProduct } from "@/lib/products";
-import { getImageForProduct } from "@/lib/product-images";
 
-export default async function Home() {
-  const bestsellerProduct = getBestsellerProduct();
-  const bestsellerImage = await getImageForProduct(
-    bestsellerProduct.id,
-    bestsellerProduct.imageKeyword,
-  );
-
+export default function Home() {
   return (
     <>
-      <Hero bestseller={{ product: bestsellerProduct, image: bestsellerImage }} />
-      <Collection />
-      <About />
-      <Values />
-      <Contact />
+      <PixelHero />
+      <div className="relative">
+        <GlowBackground />
+        <Collection />
+        <About />
+        <Values />
+        <Contact />
+      </div>
     </>
   );
 }

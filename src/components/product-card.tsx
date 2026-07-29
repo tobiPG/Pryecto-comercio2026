@@ -2,7 +2,7 @@
 
 import { useRef } from "react";
 import Image from "next/image";
-import { motion, useMotionValue, useSpring, useTransform, useReducedMotion } from "framer-motion";
+import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { Plus } from "lucide-react";
 import type { Product } from "@/types/product";
 import { formatPrice } from "@/lib/format";
@@ -16,7 +16,6 @@ interface ProductCardProps {
 
 export function ProductCard({ product, image }: ProductCardProps) {
   const ref = useRef<HTMLDivElement>(null);
-  const reduceMotion = useReducedMotion();
   const { addItem } = useCart();
 
   const x = useMotionValue(0);
@@ -31,7 +30,7 @@ export function ProductCard({ product, image }: ProductCardProps) {
   });
 
   function handleMouseMove(e: React.MouseEvent<HTMLDivElement>) {
-    if (reduceMotion || !ref.current) return;
+    if (!ref.current) return;
     const rect = ref.current.getBoundingClientRect();
     x.set((e.clientX - rect.left) / rect.width - 0.5);
     y.set((e.clientY - rect.top) / rect.height - 0.5);

@@ -1,5 +1,6 @@
 import { Gem, Ruler, Truck, Users } from "lucide-react";
 import { Reveal } from "@/components/reveal";
+import { GlowCard } from "@/components/ui/spotlight-card";
 
 const VALUES = [
   {
@@ -40,7 +41,11 @@ export function Values() {
         <div className="mt-14 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {VALUES.map((value, i) => (
             <Reveal key={value.title} delay={i * 0.1}>
-              <div className="glass group h-full rounded-2xl p-7 transition-transform duration-500 hover:-translate-y-1.5">
+              <GlowCard
+                glowColor="orange"
+                customSize
+                className="group h-full w-full transition-transform duration-500 hover:-translate-y-1.5"
+              >
                 <value.icon
                   className="mb-5 text-accent transition-transform duration-500 group-hover:scale-110"
                   size={28}
@@ -48,7 +53,7 @@ export function Values() {
                 />
                 <h3 className="mb-2 text-lg font-medium">{value.title}</h3>
                 <p className="text-sm text-muted-foreground">{value.description}</p>
-              </div>
+              </GlowCard>
             </Reveal>
           ))}
         </div>
